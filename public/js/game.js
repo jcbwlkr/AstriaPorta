@@ -2,7 +2,7 @@
 var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update, render: render });
 
 function preload() {
-    game.load.image('arrow', 'assets/arrow.png');
+    game.load.spritesheet('arrow', 'assets/hero.png', 22, 22);
     game.load.image('poke1', 'assets/poke1.jpg');
 }
 
@@ -30,6 +30,8 @@ function create() {
 
     //  Tell it we don't want physics to manage the rotation
     hero.body.allowRotation = false;
+    hero.animations.add('default', [0, 1], 2, true);
+    hero.animations.play('default');
 
 
     //Here be keyboard stuff
