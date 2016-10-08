@@ -4,6 +4,9 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: p
 function preload() {
     game.load.image('arrow', 'assets/arrow.png');
     game.load.image('poke1', 'assets/poke1.jpg');
+    game.load.image('Sally', 'assets/sally.png');
+    game.load.image('Tub', 'assets/tub.png');
+    game.load.image('Potato', 'assets/portal-potato.png');
 }
 
 //Here be globals
@@ -14,7 +17,15 @@ var battle = false;
 var capturedPokemon = {};
 var pokemon;
 var biome = 1;
-var names = ['Sally', 'Tub', 'Potato'];
+var names = [{
+        name: 'Sally'
+    },
+    {
+        name: 'Tub'
+    },
+    {
+        name: 'Potato'
+    }];
 
 function create() {
 
@@ -46,14 +57,20 @@ function startEncounter() {
     makeMon();
 }
 function makeMon() {
-    var tmpName = names[getRandomInt(0, 2)];
+    var tmpName = names[getRandomInt(0, 2)].name;
 //    pokemon = game.add.sprite(biome, tmpName,
     var xLocate = hero.x;
     var yLocate = hero.y - 100;
-    pokemon = game.add.sprite(xLocate, yLocate, "poke1");
+    var text = tmpName + ' has appeared!';
+
+    pokemon = game.add.sprite(xLocate, yLocate, tmpName);
     pokemon.name = tmpName;
     pokemon.health = 5;
     pokemon.anchor.setTo(0.4, 0.5);
+    pokemon.scale.setTo(0.1, 0.1);
+
+    var style = { font: "18px Arial", fill: "#ff0044", align: "center" };
+    var t = game.add.text(xLocate, yLocate + 150, text, style);
 }
 // Returns a random integer between min (included) and max (excluded)
 //
