@@ -175,7 +175,7 @@ function battleProcess(){
 
     console.log("Battle process started.");
 
-    var dead;
+    var dead = false;
 
 
     while(!dead){
@@ -198,12 +198,11 @@ function battleProcess(){
         battleText = game.add.text(50, 450, content, { font: "24px Arial", fill: "#e527ac" });
 
 
-        if (pokemon.health < 0 && hero.health < 0) {
+        if (pokemon.health > 0 || hero.health > 0) {
             dead = false;
         } else {
             dead = true;
         }
 
     }
-
 }
