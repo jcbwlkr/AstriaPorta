@@ -41,7 +41,7 @@ function create() {
 
 }
 
-function startEcounter() {
+function startEncounter() {
     battle = true;    
     makeMon();
 }
@@ -72,24 +72,28 @@ function update() {
     if (keyboardCommands.up.isDown && !battle) {
         sprite.body.y = sprite.body.y - 5;
         if(randomEncounters()){
+            startEncounter();
             console.log("Battle triggered");
         }
     }
     if (keyboardCommands.down.isDown && !battle) {
         sprite.body.y = sprite.body.y + 5;
         if(randomEncounters()){
+            startEncounter();
             console.log("Battle triggered");
         }
     }
     if (keyboardCommands.right.isDown && !battle) {
         sprite.body.x = sprite.body.x + 5;
         if(randomEncounters()){
+            startEncounter();
             console.log("Battle triggered");
         }
     }
     if (keyboardCommands.left.isDown && !battle) {
         sprite.body.x = sprite.body.x - 5;
         if(randomEncounters()){
+            startEncounter();
             console.log("Battle triggered");
         }
     }
