@@ -3,7 +3,6 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: p
 
 function preload() {
     game.load.spritesheet('arrow', 'assets/hero.png', 22, 22);
-    game.load.image('poke1', 'assets/poke1.jpg');
     game.load.image('Sally', 'assets/sally.png');
     game.load.image('Tub', 'assets/tub.png');
     game.load.image('Potato', 'assets/portal-potato.png');
