@@ -3,6 +3,7 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: p
 
 function preload() {
     game.load.image('arrow', 'assets/sprites/arrow.png');
+    game.load.image('poke1', 'assets/sprites/arrow.png');
 }
 
 //Here be globals
@@ -12,6 +13,8 @@ var keyboardCommands = {};
 var battle = false;
 var capturedPokemon = {};
 var pokemon;
+var biome = 1;
+var names = ['Sally', 'Tub', 'Potato'];
 
 function create() {
 
@@ -40,6 +43,27 @@ function create() {
 
 function startEcounter() {
     battle = true;    
+    makeMon();
+}
+function makeMon() {
+    var tmpName = names[getRandomInt(0, 2)];
+//    pokemon = game.add.sprite(biome, tmpName, 
+    pokemon = game.add.sprite(200, 200, "poke1");
+    pokemon.name = tmpName;
+    pokemon.health = 5;
+}
+// Returns a random integer between min (included) and max (excluded)
+//
+// Using Math.round() will give you a non-uniform distribution!
+
+function getRandomInt(min, max) {
+
+    min = Math.ceil(min);
+
+    max = Math.floor(max);
+
+    return Math.floor(Math.random() * (max - min)) + min;
+
 }
 
 function update() {
