@@ -47,8 +47,10 @@ function startEcounter() {
 }
 function makeMon() {
     var tmpName = names[getRandomInt(0, 2)];
-//    pokemon = game.add.sprite(biome, tmpName, 
-    pokemon = game.add.sprite(200, 200, "poke1");
+//    pokemon = game.add.sprite(biome, tmpName,
+    var xLocate = Sprite.x;
+    var yLocate = Sprite.y - 200;
+    pokemon = game.add.sprite(xLocate, yLocate, "poke1");
     pokemon.name = tmpName;
     pokemon.health = 5;
 }
