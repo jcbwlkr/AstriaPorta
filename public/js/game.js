@@ -9,6 +9,9 @@ function preload() {
 var sprite;
 var cursor;
 var keyboardCommands = {};
+var battle = false;
+var capturedPokemon = {};
+var pokemon;
 
 function create() {
 
@@ -35,18 +38,22 @@ function create() {
 
 }
 
+function startEcounter() {
+    battle = true;    
+}
+
 function update() {
-    if (keyboardCommands.up.isDown) {
-        sprite.body.y--
+    if (keyboardCommands.up.isDown && !battle) {
+        sprite.body.y = sprite.body.y - 5;
     }
-    if (keyboardCommands.down.isDown) {
-        sprite.body.y++
+    if (keyboardCommands.down.isDown && !battle) {
+        sprite.body.y = sprite.body.y + 5;
     }
-    if (keyboardCommands.right.isDown) {
-        sprite.body.x++;
+    if (keyboardCommands.right.isDown && !battle) {
+        sprite.body.x = sprite.body.x + 5;
     }
-    if (keyboardCommands.left.isDown) {
-        sprite.body.x--;
+    if (keyboardCommands.left.isDown && !battle) {
+        sprite.body.x = sprite.body.x - 5;
     }
 
 //    sprite.rotation = game.physics.arcade.moveToPointer(sprite, 60, game.input.activePointer, 500);
