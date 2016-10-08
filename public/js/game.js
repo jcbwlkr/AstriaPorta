@@ -45,15 +45,27 @@ function startEcounter() {
 function update() {
     if (keyboardCommands.up.isDown && !battle) {
         sprite.body.y = sprite.body.y - 5;
+        if(randomEncounters()){
+            console.log("Battle triggered");
+        }
     }
     if (keyboardCommands.down.isDown && !battle) {
         sprite.body.y = sprite.body.y + 5;
+        if(randomEncounters()){
+            console.log("Battle triggered");
+        }
     }
     if (keyboardCommands.right.isDown && !battle) {
         sprite.body.x = sprite.body.x + 5;
+        if(randomEncounters()){
+            console.log("Battle triggered");
+        }
     }
     if (keyboardCommands.left.isDown && !battle) {
         sprite.body.x = sprite.body.x - 5;
+        if(randomEncounters()){
+            console.log("Battle triggered");
+        }
     }
 
 //    sprite.rotation = game.physics.arcade.moveToPointer(sprite, 60, game.input.activePointer, 500);
@@ -63,5 +75,14 @@ function update() {
 function render() {
 
     game.debug.spriteInfo(sprite, 32, 32);
+
+}
+
+function randomEncounters(){
+
+    if(Math.random() > 0.98){
+        confirm("Battle initiated. Yes or No?");
+        return true;
+    }
 
 }
