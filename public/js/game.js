@@ -49,10 +49,11 @@ function makeMon() {
     var tmpName = names[getRandomInt(0, 2)];
 //    pokemon = game.add.sprite(biome, tmpName,
     var xLocate = hero.x;
-    var yLocate = hero.y - 200;
+    var yLocate = hero.y - 100;
     pokemon = game.add.sprite(xLocate, yLocate, "poke1");
     pokemon.name = tmpName;
     pokemon.health = 5;
+    pokemon.anchor.setTo(0.4, 0.5);
 }
 // Returns a random integer between min (included) and max (excluded)
 //
