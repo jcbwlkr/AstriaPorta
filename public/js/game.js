@@ -5,7 +5,10 @@ function preload() {
     game.load.image('arrow', 'assets/sprites/arrow.png');
 }
 
+//Here be globals
 var sprite;
+var cursor;
+var keyboardCommands = {};
 
 function create() {
 
@@ -22,11 +25,31 @@ function create() {
     //  Tell it we don't want physics to manage the rotation
     sprite.body.allowRotation = false;
 
+
+    //Here be keyboard stuff
+    cursor = game.input.keyboard.createCursorKeys();
+    keyboardCommands.up = game.input.keyboard.addKey(Phaser.Keyboard.W);
+    keyboardCommands.down = game.input.keyboard.addKey(Phaser.Keyboard.S);
+    keyboardCommands.left = game.input.keyboard.addKey(Phaser.Keyboard.A);
+    keyboardCommands.right = game.input.keyboard.addKey(Phaser.Keyboard.D);
+
 }
 
 function update() {
+    if (keyboardCommands.up.isDown) {
+        sprite.body.y--
+    }
+    if (keyboardCommands.down.isDown) {
+        sprite.body.y++
+    }
+    if (keyboardCommands.right.isDown) {
+        sprite.body.x++;
+    }
+    if (keyboardCommands.left.isDown) {
+        sprite.body.x--;
+    }
 
-    sprite.rotation = game.physics.arcade.moveToPointer(sprite, 60, game.input.activePointer, 500);
+//    sprite.rotation = game.physics.arcade.moveToPointer(sprite, 60, game.input.activePointer, 500);
 
 }
 
