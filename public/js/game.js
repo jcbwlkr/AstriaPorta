@@ -26,6 +26,7 @@ var names = [{
     {
         name: 'Potato'
     }];
+var battleText;
 
 function create() {
 
@@ -44,6 +45,8 @@ function create() {
     hero.animations.add('default', [0, 1], 2, true);
     hero.animations.play('default');
 
+    hero.health = 5;
+
 
     //Here be keyboard stuff
     cursor = game.input.keyboard.createCursorKeys();
@@ -54,12 +57,15 @@ function create() {
 
 }
 
+/**
 function startEncounter() {
     battle = true;    
     makeMon();
 }
+ **/
+
 function makeMon() {
-    var tmpName = names[getRandomInt(0, 2)].name;
+    var tmpName = names[getRandomInt(0, 3)].name;
 //    pokemon = game.add.sprite(biome, tmpName,
     var xLocate = hero.x;
     var yLocate = hero.y - 100;
@@ -92,28 +98,24 @@ function update() {
     if (keyboardCommands.up.isDown && !battle) {
         hero.body.y = hero.body.y - 5;
         if(randomEncounters()){
-            startEncounter();
             console.log("Battle triggered");
         }
     }
     if (keyboardCommands.down.isDown && !battle) {
         hero.body.y = hero.body.y + 5;
         if(randomEncounters()){
-            startEncounter();
             console.log("Battle triggered");
         }
     }
     if (keyboardCommands.right.isDown && !battle) {
         hero.body.x = hero.body.x + 5;
         if(randomEncounters()){
-            startEncounter();
             console.log("Battle triggered");
         }
     }
     if (keyboardCommands.left.isDown && !battle) {
         hero.body.x = hero.body.x - 5;
         if(randomEncounters()){
-            startEncounter();
             console.log("Battle triggered");
         }
     }
@@ -130,9 +132,48 @@ function render() {
 
 function randomEncounters(){
 
-    if(Math.random() > 0.98){
-        confirm("Battle initiated. Yes or No?");
-        return true;
+    if(Math.random() > 0.995){
+        alert("Battle initiated.");
+        battle = true;
+        makeMon();
+        battleProcess();
+    }
+
+}
+
+function battleProcess(){
+
+    console.log("Battle process started.");
+
+    var dead;
+
+
+    while(!dead){
+
+        if(battleText) {
+            battleText.destroy();
+        }
+
+        var monAttack = getRandomInt(0, 4);
+        var heroAttack = getRandomInt(0, 4);
+
+        pokemon.health = pokemon.health - heroAttack;
+        hero.health = hero.health - monAttack;
+
+        console.log("BATTLE PROCESS: monAttack: " + monAttack + " heroAttack: " + heroAttack + " pokemon.health: " + pokemon.health + " Hero health: " + hero.health);
+
+
+        var content = " Hero attacks with " + heroAttack + " damage. \n Monster's health is now " + pokemon.health + ". \n The Monster attacks with " + monAttack + " damage.\n The hero's health is now " + hero.health;
+
+        battleText = game.add.text(50, 450, content, { font: "24px Arial", fill: "#e527ac" });
+
+
+        if (pokemon.health < 0 && hero.health < 0) {
+            dead = false;
+        } else {
+            dead = true;
+        }
+
     }
 
 }
