@@ -7,7 +7,7 @@ function preload() {
 }
 
 //Here be globals
-var sprite;
+var hero;
 var cursor;
 var keyboardCommands = {};
 var battle = false;
@@ -22,14 +22,14 @@ function create() {
 
     game.stage.backgroundColor = '#0072bc';
 
-    sprite = game.add.sprite(400, 300, 'arrow');
-    sprite.anchor.setTo(0.5, 0.5);
+    hero = game.add.sprite(400, 300, 'arrow');
+    hero.anchor.setTo(0.5, 0.5);
 
     //  Enable Arcade Physics for the sprite
-    game.physics.enable(sprite, Phaser.Physics.ARCADE);
+    game.physics.enable(hero, Phaser.Physics.ARCADE);
 
     //  Tell it we don't want physics to manage the rotation
-    sprite.body.allowRotation = false;
+    hero.body.allowRotation = false;
 
 
     //Here be keyboard stuff
@@ -48,8 +48,8 @@ function startEncounter() {
 function makeMon() {
     var tmpName = names[getRandomInt(0, 2)];
 //    pokemon = game.add.sprite(biome, tmpName,
-    var xLocate = Sprite.x;
-    var yLocate = Sprite.y - 200;
+    var xLocate = hero.x;
+    var yLocate = hero.y - 200;
     pokemon = game.add.sprite(xLocate, yLocate, "poke1");
     pokemon.name = tmpName;
     pokemon.health = 5;
@@ -70,41 +70,41 @@ function getRandomInt(min, max) {
 
 function update() {
     if (keyboardCommands.up.isDown && !battle) {
-        sprite.body.y = sprite.body.y - 5;
+        hero.body.y = hero.body.y - 5;
         if(randomEncounters()){
             startEncounter();
             console.log("Battle triggered");
         }
     }
     if (keyboardCommands.down.isDown && !battle) {
-        sprite.body.y = sprite.body.y + 5;
+        hero.body.y = hero.body.y + 5;
         if(randomEncounters()){
             startEncounter();
             console.log("Battle triggered");
         }
     }
     if (keyboardCommands.right.isDown && !battle) {
-        sprite.body.x = sprite.body.x + 5;
+        hero.body.x = hero.body.x + 5;
         if(randomEncounters()){
             startEncounter();
             console.log("Battle triggered");
         }
     }
     if (keyboardCommands.left.isDown && !battle) {
-        sprite.body.x = sprite.body.x - 5;
+        hero.body.x = hero.body.x - 5;
         if(randomEncounters()){
             startEncounter();
             console.log("Battle triggered");
         }
     }
 
-//    sprite.rotation = game.physics.arcade.moveToPointer(sprite, 60, game.input.activePointer, 500);
+//    hero.rotation = game.physics.arcade.moveToPointer(hero, 60, game.input.activePointer, 500);
 
 }
 
 function render() {
 
-    game.debug.spriteInfo(sprite, 32, 32);
+    game.debug.spriteInfo(hero, 32, 32);
 
 }
 
