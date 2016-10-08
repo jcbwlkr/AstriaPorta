@@ -7,6 +7,7 @@ function preload() {
     game.load.image('Sally', 'assets/sally.png');
     game.load.image('Tub', 'assets/tub.png');
     game.load.image('Potato', 'assets/portal-potato.png');
+    game.load.image('gate', 'assets/gate.png');
 }
 
 //Here be globals
@@ -16,7 +17,10 @@ var keyboardCommands = {};
 var battle = false;
 var capturedPokemon = {};
 var pokemon;
-var biome = 1;
+var biome = 0;
+var desertGate;
+var grassGate;
+var winterGate;
 var names = [{
         name: 'Sally'
     },
@@ -31,7 +35,7 @@ function create() {
 
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
-    game.stage.backgroundColor = '#0072bc';
+    game.stage.backgroundColor = '#000000';
 
     hero = game.add.sprite(400, 300, 'arrow');
     hero.anchor.setTo(0.5, 0.5);
@@ -43,6 +47,22 @@ function create() {
     hero.body.allowRotation = false;
     hero.animations.add('default', [0, 1], 2, true);
     hero.animations.play('default');
+
+
+    //Here be gates
+    desertGate = game.add.sprite(200, 200, "gate");
+    desertGate.scale.setTo(0.1, 0.1);
+    game.physics.enable(desertGate, Phaser.Physics.ARCADE);
+//    desertGate.body.collides(hero, function () {biome = 1; console.log('hey');});
+    winterGate = game.add.sprite(400, 200, "gate");
+    winterGate.scale.setTo(0.1, 0.1);
+    game.physics.enable(winterGate, Phaser.Physics.ARCADE);
+//    winterGate.body.collides(hero, function () {biome = 2; console.log('hey');});
+    grassGate = game.add.sprite(300, 100, "gate");
+    grassGate.scale.setTo(0.1, 0.1);
+    game.physics.enable(grassGate, Phaser.Physics.ARCADE);
+//    grassGate.body.collides(hero, function () {biome = 3; console.log('hey');});
+    
 
 
     //Here be keyboard stuff
@@ -89,6 +109,16 @@ function getRandomInt(min, max) {
 }
 
 function update() {
+    game.physics.arcade.collide(hero, desertGate,
+            function () {biome = 1; game.stage.backgroundColor = '#feedb9'; desertGate.kill(); winterGate.kill(); grassGate.kill();}
+            );
+    game.physics.arcade.collide(hero, winterGate, function () {
+        biome = 2; game.stage.backgroundColor = '#ffffff'; desertGate.kill(); winterGate.kill(); grassGate.kill();}
+        );
+    game.physics.arcade.collide(hero, grassGate,
+            function () {biome = 3; game.stage.backgroundColor = '#22aa22'; desertGate.kill(); winterGate.kill(); grassGate.kill();}
+            );
+
     if (keyboardCommands.up.isDown && !battle) {
         hero.body.y = hero.body.y - 5;
         if(randomEncounters()){
