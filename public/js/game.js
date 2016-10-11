@@ -197,10 +197,10 @@ function battleProcess(){
         battleText = game.add.text(50, 450, content, { font: "24px Arial", fill: "#e527ac" });
 
 
-        if (pokemon.health > 0 || hero.health > 0) {
-            dead = false;
-        } else {
+        if (pokemon.health <= 0 || hero.health <= 0) {
             dead = true;
+        } else {
+            dead = false;
         }
 
     }
